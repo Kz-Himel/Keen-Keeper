@@ -29,7 +29,7 @@ const FriendDetails = () => {
         );
     }
     
-
+    // Destructuring
     const {
         name,
         picture,
@@ -64,7 +64,7 @@ const FriendDetails = () => {
                   <p className="badge badge-error text-white text-sm font-medium rounded-full">
                     {status}
                   </p>
-                  <p className="badge badge-success bg-green-200 badge-outline text-(--text-secondary) text-sm font-medium rounded-full">
+                  <p className="badge badge-success bg-green-200 badge-outline text-gray-700 text-sm font-medium rounded-full">
                     {Array.isArray(tags) ? tags.join(", ") : tags}
                   </p>
                 </div>
