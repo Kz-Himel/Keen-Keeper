@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const FriendsCard = ({ friend }) => {
 
   const {
-    id,
     name,
     picture,
     days_since_contact,
@@ -23,7 +22,7 @@ const FriendsCard = ({ friend }) => {
   return (
     <div className="card bg-base-100 shadow-sm p-6">
       
-      <Link to={`/user/${id}`}>
+      <Link to={`/friendDetails/${friend.id}`}>
         
         <figure className="flex justify-center">
           <img
