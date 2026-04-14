@@ -11,7 +11,7 @@ const Banner = () => {
               <h1 className="text-3xl lg:text-5xl font-bold capitalize">
                 Friends to keep close in your life
               </h1>
-              <p className="py-6">
+              <p className="py-6 text-gray-700">
                 Your personal shelf of meaningful connections. Browse, tend, and nurture the
                 <br />
                 relationships that matter most.
