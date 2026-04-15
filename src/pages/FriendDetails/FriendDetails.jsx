@@ -13,7 +13,7 @@ import { TimelineContext } from '../../context/TimelineContext';
 const FriendDetails = () => {
 
   // Use context for store global data
-  const { addEvent } = useContext(TimelineContext);
+  const { addEvent, events } = useContext(TimelineContext);
 
     // Fething friend data to show in friend details
     const friends = useLoaderData();
@@ -56,7 +56,15 @@ const FriendDetails = () => {
 
 
     // 
-    const handleAction = (type) => {
+    const handleAction = (type, name) => {
+
+      // Check if already exist
+      const alreadyExist = events.some((event) => event.person === name && event.type === type);
+
+      if(alreadyExist) {
+        alert(`${type} is already added for ${name}`);
+      }
+
       const newEvent = {
         type: type,
         person: name,
@@ -75,7 +83,7 @@ const FriendDetails = () => {
     return (
         <div>
       <div>
-        <div className="p-6 flex justify-center items-center font-sans text-slate-600">
+        <div className="p-6 flex justify-center items-center font-sans text-slate-600 mt-20 mb-10">
           <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex flex-col gap-4">
               <div className="card bg-white border border-gray-100 shadow-sm p-8 flex flex-col items-center text-center">
@@ -166,15 +174,15 @@ const FriendDetails = () => {
                   Quick Check-In
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
-                  <button onClick={() => handleAction("call")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("call", name)} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucidePhone size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Call</span>
                   </button>
-                  <button onClick={() => handleAction("text")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("text", name)} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucideMessageSquare size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Text</span>
                   </button>
-                  <button onClick={() => handleAction("video")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("video", name)} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucideVideo size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Video</span>
                   </button>

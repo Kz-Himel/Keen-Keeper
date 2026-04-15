@@ -22,7 +22,7 @@ const FriendsCard = ({ friend }) => {
   return (
     <div className="card bg-base-100 shadow-sm p-6">
       
-      <Link to={`/friendDetails/${friend.id}`}>
+      <Link to={`/friendDetails/${friend.id}`} onClick={() => window.scrollTo(0, 0)}>
         
         <figure className="flex justify-center">
           <img

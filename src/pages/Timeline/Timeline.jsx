@@ -1,11 +1,22 @@
 import React from "react";
-import { Handshake, MessageCircle, Video, Phone } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TimelineContext } from "../../context/TimelineContext";
 
 const Timeline = () => {
 
     const { events } = useContext(TimelineContext);
+    const [filterType, setFilterType] = useState("All");
+
+    const getFilteredEvents = () => {
+    if (filterType === "All") return events;
+    return events.filter((event) => event.type === filterType);
+    };
+
+    const filteredEvents = getFilteredEvents();
+
+    if (filteredEvents.length === 0) {
+      return <p className="text-gray-400">No events found</p>;
+    }
 
 
   return (
@@ -14,38 +25,46 @@ const Timeline = () => {
         <h1 className="text-4xl font-bold mb-6">Timeline</h1>
 
         <select
-          defaultValue=""
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
           className="select select-bordered w-full max-w-xs mb-8 bg-white border-slate-200"
         >
-          <option value="" disabled>
-            Filter timeline
-          </option>
           <option value="All">All entries</option>
-          <option value="Call">Call</option>
-          <option value="Text">Text</option>
-          <option value="Video">Video</option>
-          <option value="Meetup">Meetup</option>
+          <option value="call">Call</option>
+          <option value="text">Text</option>
+          <option value="video">Video</option>
         </select>
 
-        <div className="flex flex-col gap-3">
-          {
-          events.map((event, index) => (
-            <div
-              key={index}
-              className="card flex-row items-center gap-4 p-5 bg-white border border-slate-100 shadow-sm"
-            >
-              <div className="text-2xl">{event.icon}</div>
-              <div>
-                <p className="text-slate-600 font-medium">
-                  <span className="text-slate-900 font-bold">{event.type}</span>{" "}
-                  with {event.person}
-                </p>
-                <p className="text-slate-400 text-sm">{event.date}</p>
+        {/* Empty State */}
+        {filteredEvents.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-gray-400 text-xl">No events found</p>
+            <p className="text-gray-500 text-sm mt-2">
+              {filterType !== "All"
+                ? `No ${filterType} events available yet`
+                : "Your timeline is empty. Start adding some interactions!"}
+            </p>
+          </div>
+        ) : (
+          /* Events List */
+          <div className="flex flex-col gap-4">
+            {filteredEvents.map((event, index) => (
+              <div
+                key={index} // পরে event.id ব্যবহার করলে ভালো হবে
+                className="flex items-center gap-4 p-5 bg-white border border-slate-100 shadow-sm rounded-xl hover:shadow-md transition-shadow"
+              >
+                <div className="text-3xl">{event.icon}</div>
+                <div className="flex-1">
+                  <p className="text-slate-700 font-medium">
+                    <span className="font-bold capitalize">{event.type}</span>{" "}
+                    with <span className="font-semibold">{event.person}</span>
+                  </p>
+                  <p className="text-slate-400 text-sm mt-1">{event.date}</p>
+                </div>
               </div>
-            </div>
-          ))
-          }
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
