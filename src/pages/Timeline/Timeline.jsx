@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { TimelineContext } from "../../context/TimelineContext";
 
@@ -14,12 +15,11 @@ const Timeline = () => {
 
     const filteredEvents = getFilteredEvents();
 
-    if (filteredEvents.length === 0) {
-      return <p className="text-gray-400">No events found</p>;
-    }
+    const isEmpty = !filteredEvents || filteredEvents.length === 0;
 
 
   return (
+
     <div className="container mx-auto p-4">
       <div className="mx-auto p-8 bg-slate-50  text-slate-800">
         <h1 className="text-4xl font-bold mb-6">Timeline</h1>
@@ -36,15 +36,38 @@ const Timeline = () => {
         </select>
 
         {/* Empty State */}
-        {filteredEvents.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-400 text-xl">No events found</p>
-            <p className="text-gray-500 text-sm mt-2">
-              {filterType !== "All"
-                ? `No ${filterType} events available yet`
-                : "Your timeline is empty. Start adding some interactions!"}
-            </p>
-          </div>
+        {isEmpty ? (
+          <div className="flex items-center justify-center py-20">
+  <div className="bg-white border border-slate-100 shadow-sm rounded-2xl p-10 max-w-md w-full text-center">
+
+    {/* Icon */}
+    <div className="text-6xl mb-4">🕒</div>
+
+    {/* Title */}
+    <h2 className="text-2xl font-bold text-slate-800">
+      No Timeline Events Yet
+    </h2>
+
+    {/* Subtitle */}
+    <p className="text-slate-500 mt-3 text-sm leading-relaxed">
+      Your friendship timeline is empty right now.  
+      Start adding calls, texts, or video interactions to see your history here.
+    </p>
+
+    {/* Small hint box */}
+    <div className="mt-6 bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-600">
+      💡 Tip: Every interaction you add will appear in your timeline instantly.
+    </div>
+
+    {/* Button */}
+    <Link to="/">
+      <button className="mt-6 w-full py-2.5 bg-[#244d3f] text-white rounded-xl hover:bg-[#1d3d31] transition font-medium">
+        Add First Interaction
+      </button>
+    </Link>
+
+  </div>
+</div>
         ) : (
           /* Events List */
           <div className="flex flex-col gap-4">

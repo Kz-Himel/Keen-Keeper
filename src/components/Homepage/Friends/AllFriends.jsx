@@ -9,7 +9,7 @@ const AllFriends = () => {
     const friends = use(friendsPromise);
 
     return (
-        <div className="container mx-auto px-4 pt-24">
+        <div className="container mx-auto px-4 pt-24 mb-10">
             <h2 className="text-2xl font-bold mb-6">
                 Your Friends
             </h2>
