@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   LucideArchive,
   LucideBellRing,
@@ -8,8 +8,12 @@ import {
   LucideVideo,
 } from "lucide-react";
 import { useLoaderData, useParams } from 'react-router-dom';
+import { TimelineContext } from '../../context/TimelineContext';
 
 const FriendDetails = () => {
+
+  // Use context for store global data
+  const { addEvent } = useContext(TimelineContext);
 
     // Fething friend data to show in friend details
     const friends = useLoaderData();
@@ -42,6 +46,32 @@ const FriendDetails = () => {
         next_due_date
     } = expectedFriend || {};
 
+
+    // Conditional rendering for status
+    const relationStatus = {
+      "on-track": "bg-[#244d3f] text-white border-green-700",
+      "almost due": "bg-yellow-600 text-white border-emerald-700",
+      "overdue": "bg-red-500 text-white border-red-700",
+    };
+
+
+    // 
+    const handleAction = (type) => {
+      const newEvent = {
+        type: type,
+        person: name,
+        date: new Date().toLocaleDateString(),
+        icon: 
+        type === "call" 
+        ? <LucidePhone />
+        : type === "text"
+        ? <LucideMessageSquare />
+        : <LucideVideo />,
+      };
+
+      addEvent(newEvent);
+    }
+
     return (
         <div>
       <div>
@@ -61,9 +91,9 @@ const FriendDetails = () => {
                   {name}
                 </h2>
                 <div className="flex flex-col gap-2 mt-2 items-center">
-                  <p className="badge badge-error text-white text-sm font-medium rounded-full">
+                  <p className={`px-4 py-1 rounded-full text-sm font-medium ${relationStatus[status]}`}>
                     {status}
-                  </p>
+                </p>
                   <p className="badge badge-success bg-green-200 badge-outline text-gray-700 text-sm font-medium rounded-full">
                     {Array.isArray(tags) ? tags.join(", ") : tags}
                   </p>
@@ -136,15 +166,15 @@ const FriendDetails = () => {
                   Quick Check-In
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
-                  <button className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("call")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucidePhone size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Call</span>
                   </button>
-                  <button className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("text")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucideMessageSquare size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Text</span>
                   </button>
-                  <button className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
+                  <button onClick={() => handleAction("video")} className="flex flex-col items-center justify-center py-6 rounded-xl border-2 border-gray-100 bg-gray-50/50 hover:bg-gray-100 transition-all gap-2">
                     <LucideVideo size={24} className="text-slate-800" />
                     <span className="text-sm font-medium">Video</span>
                   </button>
