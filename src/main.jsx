@@ -5,11 +5,13 @@ import App from './App.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './routs/Routs.jsx'
 import TimelineProvider from './context/TimelineContext.jsx'
+import { ToastContainer } from 'react-toastify';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <TimelineProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </TimelineProvider>
   </StrictMode>,
 )

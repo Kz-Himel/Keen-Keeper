@@ -73,7 +73,7 @@ const Timeline = () => {
           <div className="flex flex-col gap-4">
             {filteredEvents.map((event, index) => (
               <div
-                key={index} // পরে event.id ব্যবহার করলে ভালো হবে
+                key={index}
                 className="flex items-center gap-4 p-5 bg-white border border-slate-100 shadow-sm rounded-xl hover:shadow-md transition-shadow"
               >
                 <div className="text-3xl">{event.icon}</div>

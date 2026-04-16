@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useLoaderData, useParams } from 'react-router-dom';
 import { TimelineContext } from '../../context/TimelineContext';
+import { toast } from 'react-toastify';
 
 const FriendDetails = () => {
 
@@ -62,7 +63,9 @@ const FriendDetails = () => {
       const alreadyExist = events.some((event) => event.person === name && event.type === type);
 
       if(alreadyExist) {
-        alert(`${type} is already added for ${name}`);
+        toast.error(`${type} is already added for ${name}`);
+      } else {
+        toast.success(`${type} is added for ${name}`)
       }
 
       const newEvent = {
@@ -146,7 +149,7 @@ const FriendDetails = () => {
                   </span>
                 </div>
                 <div className="card bg-white border border-gray-100 shadow-sm p-6 flex flex-col items-center justify-center">
-                  <span className="text-2xl font-bold text-emerald-800 leading-none">
+                  <span className="text-xl font-bold text-emerald-800 leading-none">
                     {next_due_date}
                   </span>
                   <span className="text-[11px] text-gray-400 mt-3">
