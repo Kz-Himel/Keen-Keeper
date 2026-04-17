@@ -19,7 +19,7 @@ const Footer = () => {
           <nav>
             <h1 className="text-2xl font-bold">Social Links</h1>
             <div className="grid grid-flow-col gap-4 mt-4">
-              <a>
+              <a className="cursor-pointer">
                 <img
                   src={Instagram}
                   alt="Instagram"
@@ -28,7 +28,7 @@ const Footer = () => {
                   className="fill-current"
                 />
               </a>
-              <a>
+              <a className="cursor-pointer">
                 <img
                   src={Facebook}
                   alt="Facebook"
@@ -37,7 +37,7 @@ const Footer = () => {
                   className="fill-current"
                 />
               </a>
-              <a>
+              <a className="cursor-pointer">
                 <img
                   src={Twitter}
                   alt="Twitter"
@@ -48,12 +48,12 @@ const Footer = () => {
               </a>
             </div>
           </nav>
-          <div className="divider h-0 my-0 before:bg-[#1A8862] after:bg-transparent w-full"></div>
-          <aside className="flex flex-col md:flex-row items-center justify-between w-full">
+          <div className="divider h-0 my-0 before:bg-[#2e6653] after:bg-transparent w-full"></div>
+          <aside className="flex flex-col md:flex-row items-center justify-between w-full text-gray-400">
             <div>
               <p>© 2026 Bondly. All rights reserved.</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-gray-400">
               <a href="">Privacy Policy</a>
               <a href="">Terms of Service</a>
               <a href="">Cookies</a>
