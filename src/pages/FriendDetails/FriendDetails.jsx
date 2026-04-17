@@ -64,9 +64,8 @@ const FriendDetails = () => {
 
       if(alreadyExist) {
         toast.error(`${type} is already added for ${name}`);
-      } else {
-        toast.success(`${type} is added for ${name}`)
-      }
+        return;
+      } 
 
       const newEvent = {
         type: type,
@@ -81,6 +80,7 @@ const FriendDetails = () => {
       };
 
       addEvent(newEvent);
+      toast.success(`${type} is added for ${name}`)
     }
 
     return (

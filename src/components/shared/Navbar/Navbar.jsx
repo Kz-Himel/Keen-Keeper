@@ -65,7 +65,7 @@ const Navbar = () => {
                             </div>
                             
                             <Link to={'/'} className="text-2xl font-bold ml-4 lg:ml-0">
-                                Keen <span className='text-[#244d3f]'>Keeper</span>
+                                Keen<span className='text-[#244d3f]'>Keeper</span>
                             </Link>
                         </div>
 
